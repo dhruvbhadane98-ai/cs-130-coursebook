@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dhruv Game — Ultimate Mini Games</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080b18;
+    --card: #11162b;
+    --card2: #171d38;
+    --text: #ffffff;
+    --muted: #a9b0ca;
+    --primary: #7c5cff;
+    --secondary: #00d9ff;
+    --success: #20e3a2;
+    --danger: #ff4d6d;
+    --gold: #ffd166;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(124,92,255,.20), transparent 25%),
+        radial-gradient(circle at 90% 20%, rgba(0,217,255,.12), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* HEADER */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    background: rgba(8,11,24,.85);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    background: linear-gradient(90deg,#fff,var(--secondary),var(--primary));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.logo span {
+    color: var(--secondary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: .2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.search {
+    width: 220px;
+    padding: 11px 15px;
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,.1);
+    background: #10152a;
+    color: white;
+    outline: none;
+}
+
+.search:focus {
+    border-color: var(--primary);
+}
+
+/* HERO */
+.hero {
+    max-width: 1250px;
+    margin: auto;
+    min-height: 440px;
+    padding: 80px 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.badge {
+    display: inline-block;
+    background: rgba(124,92,255,.15);
+    border: 1px solid rgba(124,92,255,.4);
+    padding: 8px 14px;
+    border-radius: 30px;
+    color: #c8bdff;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 82px);
+    line-height: .95;
+    margin-bottom: 20px;
+}
+
+.gradient {
+    background: linear-gradient(90deg,#fff,var(--secondary),#8d6cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+.hero-buttons {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: none;
+    padding: 13px 21px;
+    border-radius: 12px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.primary {
+    background: linear-gradient(135deg,var(--primary),#4b7cff);
+}
+
+.secondary-btn {
+    background: #151b32;
+    border: 1px solid rgba(255,255,255,.1);
+}
+
+.hero-art {
+    width: 300px;
+    height: 300px;
+    border-radius: 40px;
+    display: grid;
+    place-items: center;
+    font-size: 120px;
+    background:
+        linear-gradient(135deg,rgba(124,92,255,.3),rgba(0,217,255,.08));
+    box-shadow: 0 30px 80px rgba(0,0,0,.4);
+    transform: rotate(4deg);
+}
+
+/* SECTION */
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 30px 20px 70px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+}
+
+.section-title p {
+    color: var(--muted);
+}
+
+/* FILTER */
+.filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.filter {
+    border: 1px solid rgba(255,255,255,.1);
+    background: #11162b;
+    color: #b8bfd9;
+    padding: 10px 16px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.filter.active,
+.filter:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* GAME GRID */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+}
+
+.game-card {
+    background: linear-gradient(145deg,var(--card),#0e1327);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: .25s;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(124,92,255,.6);
+    box-shadow: 0 18px 50px rgba(0,0,0,.3);
+}
+
+.game-icon {
+    height: 145px;
+    display: grid;
+    place-items: center;
+    font-size: 65px;
+    background:
+        radial-gradient(circle,rgba(124,92,255,.25),transparent 60%),
+        #11162b;
+}
+
+.game-info {
+    padding: 18px;
+}
+
+.game-info h3 {
+    margin-bottom: 7px;
+}
+
+.game-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.game-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 14px;
+    color: #8991ae;
+    font-size: 12px;
+}
+
+.play-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(124,92,255,.15);
+    color: #c9c0ff;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.play-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 2000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.game-window {
+    width: min(800px,100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: #0e1327;
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 24px;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 30px 100px #000;
+}
+
+.close {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #202640;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.game-window h2 {
+    margin-bottom: 10px;
+}
+
+.game-description {
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+/* GAME AREA */
+.game-area {
+    min-height: 350px;
+    border-radius: 18px;
+    background: #080c1b;
+    border: 1px solid rgba(255,255,255,.08);
+    padding: 25px;
+    text-align: center;
+}
+
+.game-score {
+    color: var(--gold);
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.big-btn {
+    background: linear-gradient(135deg,var(--primary),#4d8cff);
+    border: none;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 7px;
+}
+
+.choice {
+    min-width: 110px;
+}
+
+.result {
+    min-height: 40px;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* TIC TAC TOE */
+.ttt {
+    display: grid;
+    grid-template-columns: repeat(3,80px);
+    justify-content: center;
+    gap: 7px;
+    margin: 20px auto;
+}
+
+.ttt button {
+    height: 80px;
+    font-size: 30px;
+    background: #171d38;
+    color: white;
+    border: 1px solid #303859;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* MEMORY */
+.memory {
+    display: grid;
+    grid-template-columns: repeat(4,70px);
+    justify-content: center;
+    gap: 10px;
+}
+
+.memory-card {
+    height: 70px;
+    border-radius: 10px;
+    background: #171d38;
+    color: transparent;
+    font-size: 28px;
+    border: 1px solid #303859;
+    cursor: pointer;
+}
+
+.memory-card.open {
+    color: white;
+    background: var(--primary);
+}
+
+/* NUMBER */
+.number-input {
+    width: 180px;
+    padding: 13px;
+    border-radius: 10px;
+    border: 1px solid #323b60;
+    background: #151a31;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    outline: none;
+}
+
+/* CLICK */
+.click-target {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    background: var(--danger);
+    border: none;
+    cursor: pointer;
+}
+
+/* REACTION */
+.reaction-box {
+    height: 220px;
+    border-radius: 15px;
+    display: grid;
+    place-items: center;
+    background: #252b43;
+    cursor: pointer;
+    font-size: 22px;
+}
+
+/* FOOTER */
+footer {
+    border-top: 1px solid rgba(255,255,255,.08);
+    text-align: center;
+    padding: 35px 20px;
+    color: var(--muted);
+}
+
+footer strong {
+    color: white;
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px) {
+    .game-grid {
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    .hero-art {
+        width: 230px;
+        height: 230px;
+        font-size: 90px;
+    }
+}
+
+@media(max-width:750px) {
+    .nav-links {
+        display: none;
+    }
+
+    .search {
+        width: 150px;
+    }
+
+    .hero {
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hero p {
+        margin: auto;
+    }
+
+    .hero-art {
+        display: none;
+    }
+
+    .game-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:500px) {
+    .navbar {
+        padding: 12px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .search {
+        width: 135px;
+    }
+
+    .hero {
+        padding-top: 55px;
+    }
+
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-title {
+        display: block;
+    }
+
+    .section-title p {
+        margin-top: 6px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">🎮 Dhruv<span>Game</span></div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <input
+            id="search"
+            class="search"
+            type="search"
+            placeholder="🔍 Search games..."
+        >
+    </nav>
+</header>
+
+<main id="home">
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="badge">🔥 12+ Free Mini Games</span>
+
+        <h1>
+            Welcome to<br>
+            <span class="gradient">Dhruv Game</span>
+        </h1>
+
+        <p>
+            Play exciting mini-games directly in your browser.
+            No download, no installation — just choose a game and start playing!
+        </p>
+
+        <div class="hero-buttons">
+            <button class="btn primary" onclick="scrollToGames()">
+                🎮 Play Games
+            </button>
+
+            <button class="btn secondary-btn" onclick="randomGame()">
+                🎲 Random Game
+            </button>
+        </div>
+    </div>
+
+    <div class="hero-art">🎮</div>
+</section>
+
+<section class="container" id="games">
+
+    <div class="section-title">
+        <div>
+            <h2>Game Collection</h2>
+            <p>Choose your favorite game and have fun.</p>
+        </div>
+    </div>
+
+    <div class="filters">
+        <button class="filter active" data-filter="all">All Games</button>
+        <button class="filter" data-filter="arcade">Arcade</button>
+        <button class="filter" data-filter="puzzle">Puzzle</button>
+        <button class="filter" data-filter="classic">Classic</button>
+        <button class="filter" data-filter="action">Action</button>
+    </div>
+
+    <div class="game-grid" id="gameGrid">
+
+        <div class="game-card" data-name="Tic Tac Toe" data-category="classic" onclick="openGame('ttt')">
+            <div class="game-icon">❌⭕</div>
+            <div class="game-info">
+                <h3>Tic Tac Toe</h3>
+                <p>Beat the computer in this classic game.</p>
+                <div class="game-meta"><span>⭐ Classic</span><span>2 Players</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Rock Paper Scissors" data-category="classic" onclick="openGame('rps')">
+            <div class="game-icon">✊</div>
+            <div class="game-info">
+                <h3>Rock Paper Scissors</h3>
+                <p>Can you beat the computer?</p>
+                <div class="game-meta"><span>⚡ Easy</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Number Guess" data-category="puzzle" onclick="openGame('guess')">
+            <div class="game-icon">🔢</div>
+            <div class="game-info">
+                <h3>Number Guess</h3>
+                <p>Guess the secret number.</p>
+                <div class="game-meta"><span>🧠 Puzzle</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Memory Match" data-category="puzzle" onclick="openGame('memory')">
+            <div class="game-icon">🧠</div>
+            <div class="game-info">
+                <h3>Memory Match</h3>
+                <p>Find all matching pairs.</p>
+                <div class="game-meta"><span>🧠 Brain</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Click Challenge" data-category="arcade" onclick="openGame('click')">
+            <div class="game-icon">🖱️</div>
+            <div class="game-info">
+                <h3>Click Challenge</h3>
+                <p>Click as many times as possible.</p>
+                <div class="game-meta"><span>🔥 Fast</span><span>30 Sec</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Reaction Test" data-category="action" onclick="openGame('reaction')">
+            <div class="game-icon">⚡</div>
+            <div class="game-info">
+                <h3>Reaction Test</h3>
+                <p>Test how fast your reaction is.</p>
+                <div class="game-meta"><span>⚡ Speed</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Dice Roller" data-category="classic" onclick="openGame('dice')">
+            <div class="game-icon">🎲</div>
+            <div class="game-info">
+                <h3>Dice Roller</h3>
+                <p>Roll the dice and test your luck.</p>
+                <div class="game-meta"><span>🍀 Luck</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Coin Flip" data-category="classic" onclick="openGame('coin')">
+            <div class="game-icon">🪙</div>
+            <div class="game-info">
+                <h3>Coin Flip</h3>
+                <p>Heads or tails?</p>
+                <div class="game-meta"><span>🍀 Luck</span><span>Quick</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Color Quiz" data-category="puzzle" onclick="openGame('color')">
+            <div class="game-icon">🎨</div>
+            <div class="game-info">
+                <h3>Color Quiz</h3>
+                <p>Choose the correct color.</p>
+                <div class="game-meta"><span>🎨 Quiz</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Math Challenge" data-category="puzzle" onclick="openGame('math')">
+            <div class="game-icon">➗</div>
+            <div class="game-info">
+                <h3>Math Challenge</h3>
+                <p>Solve math problems quickly.</p>
+                <div class="game-meta"><span>🧠 Brain</span><span>Timed</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="Catch Box" data-category="action" onclick="openGame('catch')">
+            <div class="game-icon">📦</div>
+            <div class="game-info">
+                <h3>Catch Box</h3>
+                <p>Catch the moving box.</p>
+                <div class="game-meta"><span>🔥 Action</span><span>30 Sec</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+        <div class="game-card" data-name="High Low" data-category="arcade" onclick="openGame('highlow')">
+            <div class="game-icon">📈</div>
+            <div class="game-info">
+                <h3>High Low</h3>
+                <p>Guess whether the next number is higher.</p>
+                <div class="game-meta"><span>🎯 Strategy</span><span>1 Player</span></div>
+                <button class="play-btn">PLAY NOW</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="container" id="about">
+    <div class="section-title">
+        <div>
+            <h2>About Dhruv Game</h2>
+            <p>A simple browser gaming hub made for fun.</p>
+        </div>
+    </div>
+
+    <p style="color:#a9b0ca;line-height:1.8;max-width:800px;">
+        Dhruv Game brings multiple lightweight games together in one beautiful
+        website. Everything runs directly in your browser using HTML, CSS and
+        JavaScript. Have fun, challenge yourself and try to beat your best scores!
+    </p>
+</section>
+
+</main>
+
+<footer>
+    <strong>🎮 Dhruv Game</strong>
+    <br><br>
+    Made with ❤️ using HTML, CSS & JavaScript
+    <br>
+    © 2026 Dhruv Game. All rights reserved.
+</footer>
+
+<!-- GAME MODAL -->
+<div class="modal" id="modal">
+    <div class="game-window">
+        <button class="close" onclick="closeGame()">×</button>
+
+        <h2 id="gameTitle">Game</h2>
+        <p class="game-description" id="gameDescription"></p>
+
+        <div class="game-area" id="gameArea"></div>
+    </div>
+</div>
+
+<script>
+
+/* ===============================
+   GENERAL SYSTEM
+================================ */
+
+const modal = document.getElementById("modal");
+const gameTitle = document.getElementById("gameTitle");
+const gameDescription = document.getElementById("gameDescription");
+const gameArea = document.getElementById("gameArea");
+
+function openGame(game) {
+    modal.classList.add("show");
+
+    const games = {
+        ttt: ["❌⭕ Tic Tac Toe", "Play Tic Tac Toe against the computer."],
+        rps: ["✊ Rock Paper Scissors", "Choose your move and beat the computer."],
+        guess: ["🔢 Number Guess", "Guess the secret number between 1 and 100."],
+        memory: ["🧠 Memory Match", "Find all matching emoji pairs."],
+        click: ["🖱️ Click Challenge", "Click the target as many times as possible in 30 seconds."],
+        reaction: ["⚡ Reaction Test", "Wait for green and click as quickly as possible."],
+        dice: ["🎲 Dice Roller", "Roll a virtual dice."],
+        coin: ["🪙 Coin Flip", "Choose heads or tails."],
+        color: ["🎨 Color Quiz", "Find the correct color."],
+        math: ["➗ Math Challenge", "Solve as many math problems as possible."],
+        catch: ["📦 Catch Box", "Catch the moving box before time runs out."],
+        highlow: ["📈 High Low", "Guess if the next number will be higher or lower."]
+    };
+
+    gameTitle.textContent = games[game][0];
+    gameDescription.textContent = games[game][1];
+
+    const gameFunctions = {
+        ttt: tttGame,
+        rps: rpsGame,
+        guess: guessGame,
+        memory: memoryGame,
+        click: clickGame,
+        reaction: reactionGame,
+        dice: diceGame,
+        coin: coinGame,
+        color: colorGame,
+        math: mathGame,
+        catch: catchGame,
+        highlow: highLowGame
+    };
+
+    gameFunctions[game]();
+}
+
+function closeGame() {
+    modal.classList.remove("show");
+    gameArea.innerHTML = "";
+}
+
+modal.addEventListener("click", e => {
+    if (e.target === modal) closeGame();
+});
+
+function scrollToGames() {
+    document.getElementById("games").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function randomGame() {
+    const ids = [
+        "ttt","rps","guess","memory","click","reaction",
+        "dice","coin","color","math","catch","highlow"
+    ];
+
+    openGame(ids[Math.floor(Math.random() * ids.length)]);
+}
+
+/* ===============================
+   SEARCH
+================================ */
+
+document.getElementById("search").addEventListener("input", function() {
+    const value = this.value.toLowerCase();
+
+    document.querySelectorAll(".game-card").forEach(card => {
+        const name = card.dataset.name.toLowerCase();
+
+        card.style.display =
+            name.includes(value) ? "block" : "none";
+    });
+});
+
+/* ===============================
+   FILTER
+================================ */
+
+document.querySelectorAll(".filter").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document.querySelectorAll(".filter")
+            .forEach(b => b.classList.remove("active"));
+
+        button.classList.add("active");
+
+        const filter = button.dataset.filter;
+
+        document.querySelectorAll(".game-card").forEach(card => {
+
+            if (
+                filter === "all" ||
+                card.dataset.category === filter
+            ) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+
+        });
+    });
+
+});
+
+/* ===============================
+   TIC TAC TOE
+================================ */
+
+function tttGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">You: X &nbsp; | &nbsp; Computer: O</div>
+        <div class="ttt" id="tttBoard"></div>
+        <div class="result" id="tttResult">Your turn!</div>
+        <button class="big-btn" onclick="tttGame()">Restart</button>
+    `;
+
+    let board = ["","","","","","","","",""];
+    let gameOver = false;
+
+    const boardEl = document.getElementById("tttBoard");
+    const result = document.getElementById("tttResult");
+
+    function draw() {
+
+        boardEl.innerHTML = "";
+
+        board.forEach((value,index) => {
+
+            const btn = document.createElement("button");
+            btn.textContent = value;
+
+            btn.onclick = () => playerMove(index);
+
+            boardEl.appendChild(btn);
+        });
+    }
+
+    function winner() {
+
+        const wins = [
+            [0,1,2],[3,4,5],[6,7,8],
+            [0,3,6],[1,4,7],[2,5,8],
+            [0,4,8],[2,4,6]
+        ];
+
+        for (const [a,b,c] of wins) {
+
+            if (
+                board[a] &&
+                board[a] === board[b] &&
+                board[a] === board[c]
+            ) {
+                return board[a];
+            }
+        }
+
+        return board.includes("") ? null : "draw";
+    }
+
+    function playerMove(index) {
+
+        if (board[index] || gameOver) return;
+
+        board[index] = "X";
+
+        let win = winner();
+
+        if (win) return finish(win);
+
+        draw();
+
+        setTimeout(computerMove,300);
+    }
+
+    function computerMove() {
+
+        const empty = board
+            .map((v,i) => v === "" ? i : null)
+            .filter(v => v !== null);
+
+        if (!empty.length) return;
+
+        const move =
+            empty[Math.floor(Math.random()*empty.length)];
+
+        board[move] = "O";
+
+        const win = winner();
+
+        if (win) finish(win);
+
+        draw();
+    }
+
+    function finish(win) {
+
+        gameOver = true;
+
+        if (win === "X")
+            result.textContent = "🎉 You Win!";
+        else if (win === "O")
+            result.textContent = "🤖 Computer Wins!";
+        else
+            result.textContent = "🤝 It's a Draw!";
+    }
+
+    draw();
+}
+
+/* ===============================
+   ROCK PAPER SCISSORS
+================================ */
+
+function rpsGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">Choose your weapon</div>
+
+        <button class="big-btn choice" onclick="playRPS('Rock')">✊ Rock</button>
+        <button class="big-btn choice" onclick="playRPS('Paper')">✋ Paper</button>
+        <button class="big-btn choice" onclick="playRPS('Scissors')">✌️ Scissors</button>
+
+        <div class="result" id="rpsResult">
+            Make your choice!
+        </div>
+
+        <button class="big-btn" onclick="rpsGame()">Restart</button>
+    `;
+}
+
+function playRPS(player) {
+
+    const choices = ["Rock","Paper","Scissors"];
+    const computer =
+        choices[Math.floor(Math.random()*3)];
+
+    let result;
+
+    if (player === computer)
+        result = "🤝 Draw!";
+    else if (
+        (player === "Rock" && computer === "Scissors") ||
+        (player === "Paper" && computer === "Rock") ||
+        (player === "Scissors" && computer === "Paper")
+    )
+        result = "🎉 You Win!";
+    else
+        result = "🤖 Computer Wins!";
+
+    document.getElementById("rpsResult").innerHTML =
+        `You: <b>${player}</b><br>
+         Computer: <b>${computer}</b><br><br>
+         ${result}`;
+}
+
+/* ===============================
+   NUMBER GUESS
+================================ */
+
+let secretNumber;
+let guessAttempts;
+
+function guessGame() {
+
+    secretNumber =
+        Math.floor(Math.random()*100)+1;
+
+    guessAttempts = 0;
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Guess a number between 1 and 100
+        </div>
+
+        <input
+            id="guessInput"
+            class="number-input"
+            type="number"
+            min="1"
+            max="100"
+            placeholder="Your guess"
+        >
+
+        <br>
+
+        <button class="big-btn" onclick="makeGuess()">
+            GUESS
+        </button>
+
+        <div class="result" id="guessResult">
+            Good luck!
+        </div>
+    `;
+}
+
+function makeGuess() {
+
+    const input = document.getElementById("guessInput");
+    const value = Number(input.value);
+
+    if (!value || value < 1 || value > 100) {
+        document.getElementById("guessResult").textContent =
+            "Enter a number from 1 to 100.";
+        return;
+    }
+
+    guessAttempts++;
+
+    const result = document.getElementById("guessResult");
+
+    if (value === secretNumber) {
+
+        result.innerHTML =
+            `🎉 Correct! You found it in ${guessAttempts} attempts!`;
+
+    } else if (value < secretNumber) {
+
+        result.textContent = "📈 Too low!";
+
+    } else {
+
+        result.textContent = "📉 Too high!";
+    }
+}
+
+/* ===============================
+   MEMORY
+================================ */
+
+function memoryGame() {
+
+    const emojis = [
+        "🍎","🍎","🚀","🚀",
+        "🐶","🐶","⚽","⚽",
+        "🎮","🎮","🔥","🔥",
+        "⭐","⭐","🍕","🍕"
+    ];
+
+    emojis.sort(() => Math.random()-.5);
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Find all matching pairs
+        </div>
+
+        <div class="memory" id="memoryBoard"></div>
+
+        <div class="result" id="memoryResult"></div>
+
+        <button class="big-btn" onclick="memoryGame()">
+            Restart
+        </button>
+    `;
+
+    const board = document.getElementById("memoryBoard");
+
+    let first = null;
+    let second = null;
+    let lock = false;
+    let matches = 0;
+
+    emojis.forEach(emoji => {
+
+        const card = document.createElement("button");
+
+        card.className = "memory-card";
+        card.textContent = emoji;
+
+        card.onclick = () => {
+
+            if (
+                lock ||
+                card === first ||
+                card.classList.contains("open")
+            ) return;
+
+            card.classList.add("open");
+
+            if (!first) {
+
+                first = card;
+
+            } else {
+
+                second = card;
+                lock = true;
+
+                if (
+                    first.textContent ===
+                    second.textContent
+                ) {
+
+                    matches++;
+
+                    first = null;
+                    second = null;
+                    lock = false;
+
+                    if (matches === 8) {
+                        document.getElementById(
+                            "memoryResult"
+                        ).textContent =
+                            "🏆 You found every pair!";
+                    }
+
+                } else {
+
+                    setTimeout(() => {
+
+                        first.classList.remove("open");
+                        second.classList.remove("open");
+
+                        first = null;
+                        second = null;
+                        lock = false;
+
+                    },700);
+                }
+            }
+        };
+
+        board.appendChild(card);
+    });
+}
+
+/* ===============================
+   CLICK CHALLENGE
+================================ */
+
+function clickGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Time: <span id="clickTime">30</span>s
+            &nbsp; | &nbsp;
+            Score: <span id="clickScore">0</span>
+        </div>
+
+        <button class="click-target"
+            id="clickTarget"
+            onclick="clickTarget()">
+        </button>
+
+        <div class="result" id="clickResult">
+            Click the target!
+        </div>
+
+        <button class="big-btn" onclick="clickGame()">
+            Restart
+        </button>
+    `;
+
+    window.clickScore = 0;
+    window.clickTime = 30;
+    window.clickStarted = false;
+
+    const target = document.getElementById("clickTarget");
+
+    target.style.display = "none";
+
+    setTimeout(() => {
+
+        target.style.display = "block";
+        window.clickStarted = true;
+
+        window.clickTimer = setInterval(() => {
+
+            clickTime--;
+
+            document.getElementById("clickTime")
+                .textContent = clickTime;
+
+            if (clickTime <= 0) {
+
+                clearInterval(window.clickTimer);
+
+                target.style.display = "none";
+                window.clickStarted = false;
+
+                document.getElementById("clickResult")
+                    .textContent =
+                    `🏆 Time's up! Score: ${clickScore}`;
+            }
+
+        },1000);
+
+    },500);
+}
+
+function clickTarget() {
+
+    if (!window.clickStarted) return;
+
+    clickScore++;
+
+    document.getElementById("clickScore")
+        .textContent = clickScore;
+
+    const target = document.getElementById("clickTarget");
+
+    target.style.position = "relative";
+    target.style.left =
+        Math.random()*80-40 + "px";
+    target.style.top =
+        Math.random()*100-50 + "px";
+}
+
+/* ===============================
+   REACTION TEST
+================================ */
+
+let reactionStart;
+let reactionTimeout;
+let reactionReady = false;
+
+function reactionGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">Reaction Test</div>
+
+        <div class="reaction-box"
+             id="reactionBox"
+             onclick="reactionClick()">
+            Click to start
+        </div>
+
+        <div class="result" id="reactionResult"></div>
+    `;
+
+    reactionReady = false;
+}
+
+function reactionClick() {
+
+    const box = document.getElementById("reactionBox");
+    const result = document.getElementById("reactionResult");
+
+    if (!reactionReady) {
+
+        box.style.background = "#b3314b";
+        box.textContent = "Wait for GREEN...";
+
+        const delay = 1500 + Math.random()*3500;
+
+        clearTimeout(reactionTimeout);
+
+        reactionTimeout = setTimeout(() => {
+
+            reactionReady = true;
+            reactionStart = performance.now();
+
+            box.style.background = "#16b879";
+            box.textContent = "CLICK NOW!";
+
+        },delay);
+
+        return;
+    }
+
+    const time =
+        Math.round(performance.now()-reactionStart);
+
+    result.textContent =
+        `⚡ Your reaction time: ${time} ms`;
+
+    box.style.background = "#252b43";
+    box.textContent = "Click to try again";
+
+    reactionReady = false;
+}
+
+/* ===============================
+   DICE
+================================ */
+
+function diceGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">Roll the Dice</div>
+
+        <div style="font-size:100px" id="dice">
+            🎲
+        </div>
+
+        <div class="result" id="diceResult">
+            Roll the dice!
+        </div>
+
+        <button class="big-btn" onclick="rollDice()">
+            ROLL
+        </button>
+    `;
+}
+
+function rollDice() {
+
+    const number =
+        Math.floor(Math.random()*6)+1;
+
+    const faces = [
+        "⚀","⚁","⚂","⚃","⚄","⚅"
+    ];
+
+    document.getElementById("dice").textContent =
+        faces[number-1];
+
+    document.getElementById("diceResult")
+        .textContent =
+        `You rolled ${number}!`;
+}
+
+/* ===============================
+   COIN
+================================ */
+
+function coinGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">Heads or Tails?</div>
+
+        <button class="big-btn" onclick="flipCoin('Heads')">
+            🟡 HEADS
+        </button>
+
+        <button class="big-btn" onclick="flipCoin('Tails')">
+            ⚪ TAILS
+        </button>
+
+        <div class="result" id="coinResult">
+            Make your prediction!
+        </div>
+    `;
+}
+
+function flipCoin(choice) {
+
+    const result =
+        Math.random() < .5 ? "Heads" : "Tails";
+
+    document.getElementById("coinResult").innerHTML =
+        `Coin: <b>${result}</b><br>` +
+        (choice === result
+            ? "🎉 You guessed correctly!"
+            : "❌ Better luck next time!");
+}
+
+/* ===============================
+   COLOR QUIZ
+================================ */
+
+function colorGame() {
+
+    const colors = [
+        {name:"RED", value:"#ff4d6d"},
+        {name:"BLUE", value:"#4285f4"},
+        {name:"GREEN", value:"#20e3a2"},
+        {name:"YELLOW", value:"#ffd166"},
+        {name:"PURPLE", value:"#9b5de5"}
+    ];
+
+    const answer =
+        colors[Math.floor(Math.random()*colors.length)];
+
+    const options =
+        [...colors].sort(() => Math.random()-.5);
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Select the color shown below
+        </div>
+
+        <div style="
+            width:130px;
+            height:130px;
+            margin:20px auto;
+            border-radius:50%;
+            background:${answer.value};
+        "></div>
+
+        <div id="colorOptions"></div>
+
+        <div class="result" id="colorResult"></div>
+    `;
+
+    options.forEach(color => {
+
+        const button =
+            document.createElement("button");
+
+        button.className = "big-btn";
+        button.textContent = color.name;
+
+        button.onclick = () => {
+
+            document.getElementById("colorResult")
+                .textContent =
+                color.name === answer.name
+                    ? "🎉 Correct!"
+                    : `❌ Wrong! It was ${answer.name}.`;
+        };
+
+        document.getElementById("colorOptions")
+            .appendChild(button);
+    });
+}
+
+/* ===============================
+   MATH CHALLENGE
+================================ */
+
+let mathScore = 0;
+let mathAnswer;
+
+function mathGame() {
+
+    mathScore = 0;
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Score: <span id="mathScore">0</span>
+        </div>
+
+        <h1 id="mathQuestion"
+            style="font-size:45px;margin:20px">
+        </h1>
+
+        <input
+            id="mathInput"
+            class="number-input"
+            type="number"
+            placeholder="Answer"
+        >
+
+        <br>
+
+        <button class="big-btn" onclick="checkMath()">
+            SUBMIT
+        </button>
+
+        <div class="result" id="mathResult"></div>
+    `;
+
+    newMathQuestion();
+}
+
+function newMathQuestion() {
+
+    const a =
+        Math.floor(Math.random()*20)+1;
+
+    const b =
+        Math.floor(Math.random()*20)+1;
+
+    const operations = ["+","-","×"];
+
+    const op =
+        operations[Math.floor(Math.random()*3)];
+
+    if (op === "+")
+        mathAnswer = a+b;
+
+    if (op === "-")
+        mathAnswer = a-b;
+
+    if (op === "×")
+        mathAnswer = a*b;
+
+    document.getElementById("mathQuestion")
+        .textContent =
+        `${a} ${op} ${b} = ?`;
+
+    document.getElementById("mathInput").value = "";
+}
+
+function checkMath() {
+
+    const answer =
+        Number(document.getElementById("mathInput").value);
+
+    const result =
+        document.getElementById("mathResult");
+
+    if (answer === mathAnswer) {
+
+        mathScore++;
+
+        document.getElementById("mathScore")
+            .textContent = mathScore;
+
+        result.textContent = "✅ Correct!";
+        newMathQuestion();
+
+    } else {
+
+        result.textContent = "❌ Try again!";
+    }
+}
+
+/* ===============================
+   CATCH BOX
+================================ */
+
+function catchGame() {
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Time: <span id="catchTime">30</span>s
+            | Score: <span id="catchScore">0</span>
+        </div>
+
+        <div style="
+            height:230px;
+            position:relative;
+            background:#10152a;
+            border-radius:15px;
+            overflow:hidden;
+        " id="catchArena">
+
+            <button id="catchTarget"
+                onclick="catchBox()"
+                style="
+                position:absolute;
+                width:55px;
+                height:55px;
+                border:none;
+                border-radius:12px;
+                background:#7c5cff;
+                cursor:pointer;
+            ">
+            📦
+            </button>
+
+        </div>
+
+        <button class="big-btn" onclick="catchGame()">
+            Restart
+        </button>
+    `;
+
+    window.catchScore = 0;
+    window.catchTime = 30;
+
+    moveCatchBox();
+
+    window.catchTimer = setInterval(() => {
+
+        catchTime--;
+
+        document.getElementById("catchTime")
+            .textContent = catchTime;
+
+        if (catchTime <= 0) {
+
+            clearInterval(window.catchTimer);
+
+            document.getElementById("catchTarget")
+                .style.display = "none";
+
+            alert(
+                "🏆 Game Over! Score: " +
+                catchScore
+            );
+        }
+
+    },1000);
+}
+
+function moveCatchBox() {
+
+    const arena =
+        document.getElementById("catchArena");
+
+    const target =
+        document.getElementById("catchTarget");
+
+    if (!arena || !target) return;
+
+    const maxX =
+        arena.clientWidth-target.offsetWidth;
+
+    const maxY =
+        arena.clientHeight-target.offsetHeight;
+
+    target.style.left =
+        Math.random()*maxX+"px";
+
+    target.style.top =
+        Math.random()*maxY+"px";
+}
+
+function catchBox() {
+
+    catchScore++;
+
+    document.getElementById("catchScore")
+        .textContent = catchScore;
+
+    moveCatchBox();
+}
+
+/* ===============================
+   HIGH LOW
+================================ */
+
+let highLowCurrent;
+
+function highLowGame() {
+
+    highLowCurrent =
+        Math.floor(Math.random()*100)+1;
+
+    gameArea.innerHTML = `
+        <div class="game-score">
+            Current Number
+        </div>
+
+        <div style="font-size:75px;font-weight:bold">
+            ${highLowCurrent}
+        </div>
+
+        <p style="color:#a9b0ca;margin:15px">
+            Will the next number be higher or lower?
+        </p>
+
+        <button class="big-btn"
+            onclick="playHighLow('higher')">
+            📈 HIGHER
+        </button>
+
+        <button class="big-btn"
+            onclick="playHighLow('lower')">
+            📉 LOWER
+        </button>
+
+        <div class="result" id="highLowResult"></div>
+    `;
+}
+
+function playHighLow(choice) {
+
+    const next =
+        Math.floor(Math.random()*100)+1;
+
+    const result =
+        document.getElementById("highLowResult");
+
+    const correct =
+        choice === "higher"
+            ? next > highLowCurrent
+            : next < highLowCurrent;
+
+    if (next === highLowCurrent) {
+
+        result.textContent =
+            `🤝 Same number: ${next}`;
+
+    } else if (correct) {
+
+        result.textContent =
+            `🎉 Correct! Next number was ${next}.`;
+
+    } else {
+
+        result.textContent =
+            `❌ Wrong! Next number was ${next}.`;
+    }
+
+    highLowCurrent = next;
+
+    setTimeout(() => {
+
+        const number =
+            gameArea.querySelector(
+                "div[style*='font-size:75px']"
+            );
+
+        if (number)
+            number.textContent = highLowCurrent;
+
+    },50);
+}
+
+/* ESC KEY */
+document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeGame();
+});
+</script>
+
+</body>
+</html>
